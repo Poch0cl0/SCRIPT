@@ -1,0 +1,972 @@
+CREATE TABLE ARBITRO
+( 
+	IdArbitro            int IDENTITY(1,1) NOT NULL ,
+	NombreArbitro        varchar(10)  NULL ,
+	IdTipoArbitro        int  NOT NULL ,
+	CodigoIdentificacion varchar(20)  NOT NULL ,
+	IdTipoIdenticacion   int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE ARBITRO
+	ADD CONSTRAINT XPKARBITRO PRIMARY KEY  CLUSTERED (IdArbitro ASC)
+go
+
+
+
+CREATE TABLE CERTIFICADO_LESION
+( 
+	IdCertificadoMedico  integer  NOT NULL ,
+	IdLesion             integer  NOT NULL ,
+	CodigoIdentificacion varchar(20)  NOT NULL ,
+	IdTipoIdenticacion   int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE CERTIFICADO_LESION
+	ADD CONSTRAINT XPKCERTIFICADO_LESION PRIMARY KEY  CLUSTERED (IdCertificadoMedico ASC,IdLesion ASC,CodigoIdentificacion ASC,IdTipoIdenticacion ASC)
+go
+
+
+
+CREATE TABLE CERTIFICADO_MEDICO
+( 
+	IdCertificadoMedico  integer  NOT NULL ,
+	FechaDeEmision       integer  NOT NULL ,
+	Peso                 float  NULL ,
+	Altura               float  NULL ,
+	IdEstado             integer  NULL ,
+	CodigoIdentificacion varchar(20)  NOT NULL ,
+	IdTipoIdenticacion   int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE CERTIFICADO_MEDICO
+	ADD CONSTRAINT XPKCERTIFICADO_MEDICO PRIMARY KEY  CLUSTERED (IdCertificadoMedico ASC,CodigoIdentificacion ASC,IdTipoIdenticacion ASC)
+go
+
+
+
+CREATE TABLE CLUB
+( 
+	IdClub               int IDENTITY ( 1,1 ) ,
+	NombreClub           varchar(20)  NULL ,
+	CodigoIdentificacion varchar(20)  NULL ,
+	IdTipoIdenticacion   int  NULL 
+)
+go
+
+
+
+ALTER TABLE CLUB
+	ADD CONSTRAINT XPKCLUB PRIMARY KEY  CLUSTERED (IdClub ASC)
+go
+
+
+
+CREATE TABLE CONTRATO
+( 
+	IdContrato           int IDENTITY ( 1,1 ) ,
+	FechaInicio          datetime  NULL ,
+	FechaFinal           datetime  NULL ,
+	IdEstado             integer  NULL ,
+	CodigoIdentificacion varchar(20)  NOT NULL ,
+	IdTipoIdenticacion   int  NOT NULL ,
+	IdClub               int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE CONTRATO
+	ADD CONSTRAINT XPKCONTRATO PRIMARY KEY  CLUSTERED (IdContrato ASC,CodigoIdentificacion ASC,IdTipoIdenticacion ASC,IdClub ASC)
+go
+
+
+
+CREATE TABLE DELEGADO_PARTIDO
+( 
+	NombreDelegadoPartido varchar(20)  NOT NULL ,
+	ApellidoDelegadoPartido varchar(30)  NOT NULL ,
+	CodigoIdentificacion varchar(20)  NOT NULL ,
+	IdTipoIdenticacion   int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE DELEGADO_PARTIDO
+	ADD CONSTRAINT XPKDELEGADO_PARTIDO PRIMARY KEY  CLUSTERED (CodigoIdentificacion ASC,IdTipoIdenticacion ASC)
+go
+
+
+
+CREATE TABLE DETALLE_ENFRENTAMIENTO
+( 
+	FechaEnfrentamiento  datetime  NULL ,
+	HoraEnfrentamiento   timestamp  NULL ,
+	IdEquipoArbitraje    int  NULL ,
+	IdEstadio            int  NULL ,
+	CodigoIdentificacion varchar(20)  NULL ,
+	IdTipoIdenticacion   int  NULL ,
+	IdClubLocal          int  NOT NULL ,
+	IdClubVisitante      int  NOT NULL ,
+	IdEtapa              int  NOT NULL ,
+	IdTorneo             int  NOT NULL ,
+	IdFecha              integer  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE DETALLE_ENFRENTAMIENTO
+	ADD CONSTRAINT XPKDETALLE_ENFRENTAMIENTO PRIMARY KEY  CLUSTERED (IdClubLocal ASC,IdClubVisitante ASC,IdEtapa ASC,IdTorneo ASC,IdFecha ASC)
+go
+
+
+
+CREATE TABLE DETALLE_SOLICITUD
+( 
+	IdSolicitud          int  NOT NULL ,
+	IdClub               int  NOT NULL ,
+	IdTorneo             int  NOT NULL ,
+	IdCertificadoMedico  integer  NULL ,
+	CodigoIdentificacion varchar(20)  NULL ,
+	IdTipoIdenticacion   int  NULL ,
+	IdEtapa              int  NOT NULL ,
+	IdContrato           int  NULL 
+)
+go
+
+
+
+ALTER TABLE DETALLE_SOLICITUD
+	ADD CONSTRAINT XPKDETALLE_SOLICITUD PRIMARY KEY  CLUSTERED (IdSolicitud ASC,IdClub ASC,IdTorneo ASC,IdEtapa ASC)
+go
+
+
+
+CREATE TABLE E_ARBITRAJE_ARBITRO
+( 
+	IdEquipoArbitraje    int  NOT NULL ,
+	IdArbitro            int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE E_ARBITRAJE_ARBITRO
+	ADD CONSTRAINT XPKE_ARBITRAJE_ARBITRO PRIMARY KEY  CLUSTERED (IdEquipoArbitraje ASC,IdArbitro ASC)
+go
+
+
+
+CREATE TABLE ENFRENTAMIENTO
+( 
+	IdClubVisitante      int  NOT NULL ,
+	IdClubLocal          int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE ENFRENTAMIENTO
+	ADD CONSTRAINT XPKENFRENTAMIENTO PRIMARY KEY  CLUSTERED (IdClubVisitante ASC,IdClubLocal ASC)
+go
+
+
+
+CREATE TABLE EQUIPO_ARBITRAJE
+( 
+	IdEquipoArbitraje    int IDENTITY ( 1,1 ) ,
+	DescripciónEquipo    varchar(60)  NULL 
+)
+go
+
+
+
+ALTER TABLE EQUIPO_ARBITRAJE
+	ADD CONSTRAINT XPKEQUIPO_ARBITRAJE PRIMARY KEY  CLUSTERED (IdEquipoArbitraje ASC)
+go
+
+
+
+CREATE TABLE ESTADIO
+( 
+	IdEstadio            int IDENTITY ( 1,1 ) ,
+	NombreEstadio        varchar(15)  NULL ,
+	UbicaciónEstadio     varchar(25)  NULL ,
+	AforoEstadio         int  NULL 
+)
+go
+
+
+
+ALTER TABLE ESTADIO
+	ADD CONSTRAINT XPKESTADIO PRIMARY KEY  CLUSTERED (IdEstadio ASC)
+go
+
+
+
+CREATE TABLE ESTADOS
+( 
+	IdEstado             integer IDENTITY ( 1,1 ) ,
+	NombreEstado         varchar(32)  NULL 
+)
+go
+
+
+
+ALTER TABLE ESTADOS
+	ADD CONSTRAINT XPKESTADOS PRIMARY KEY  CLUSTERED (IdEstado ASC)
+go
+
+
+
+CREATE TABLE ETAPA
+( 
+	IdEtapa              int IDENTITY ( 1,1 ) ,
+	NombreEtapa          varchar(20)  NULL 
+)
+go
+
+
+
+ALTER TABLE ETAPA
+	ADD CONSTRAINT XPKETAPA PRIMARY KEY  CLUSTERED (IdEtapa ASC)
+go
+
+
+
+CREATE TABLE ETAPA_FECHA
+( 
+	IdEtapa              int  NOT NULL ,
+	IdFecha              integer  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE ETAPA_FECHA
+	ADD CONSTRAINT XPKETAPA_FECHA PRIMARY KEY  CLUSTERED (IdEtapa ASC,IdFecha ASC)
+go
+
+
+
+CREATE TABLE FECHA
+( 
+	IdFecha              integer IDENTITY ( 1,1 ) ,
+	NumeroFecha          integer  NULL 
+)
+go
+
+
+
+ALTER TABLE FECHA
+	ADD CONSTRAINT XPKFECHA PRIMARY KEY  CLUSTERED (IdFecha ASC)
+go
+
+
+
+CREATE TABLE FICHA_PROGRAMACIÓN
+( 
+	IdEtapa              int  NOT NULL ,
+	IdTorneo             int  NOT NULL ,
+	IdFecha              integer  NOT NULL ,
+	FechaInicio          datetime  NOT NULL ,
+	FechaFinal           datetime  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE FICHA_PROGRAMACIÓN
+	ADD CONSTRAINT XPKFICHA_PROGRAMACIÓN PRIMARY KEY  CLUSTERED (IdEtapa ASC,IdTorneo ASC,IdFecha ASC)
+go
+
+
+
+CREATE TABLE IDENTIFICACION
+( 
+	CodigoIdentificacion varchar(20)  NOT NULL ,
+	IdTipoIdenticacion   int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE IDENTIFICACION
+	ADD CONSTRAINT XPKIDENTIFICACION PRIMARY KEY  CLUSTERED (CodigoIdentificacion ASC,IdTipoIdenticacion ASC)
+go
+
+
+
+CREATE TABLE JUGADOR
+( 
+	NombreJugador        varchar(10)  NOT NULL ,
+	ApellidoJugador      varchar(20)  NOT NULL ,
+	FechaNacimiento      datetime  NULL ,
+	NacionalidadJugador  varchar(15)  NULL ,
+	CodigoIdentificacion varchar(20)  NOT NULL ,
+	IdTipoIdenticacion   int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE JUGADOR
+	ADD CONSTRAINT XPKJUGADOR PRIMARY KEY  CLUSTERED (CodigoIdentificacion ASC,IdTipoIdenticacion ASC)
+go
+
+
+
+CREATE TABLE JUGADOR_CLUB
+( 
+	CodigoIdentificacion varchar(20)  NOT NULL ,
+	IdTipoIdenticacion   int  NOT NULL ,
+	IdClub               int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE JUGADOR_CLUB
+	ADD CONSTRAINT XPKJUGADOR_CLUB PRIMARY KEY  CLUSTERED (CodigoIdentificacion ASC,IdTipoIdenticacion ASC,IdClub ASC)
+go
+
+
+
+CREATE TABLE LESION
+( 
+	IdLesion             integer IDENTITY ( 1,1 ) ,
+	DetalleLesion        varchar(30)  NULL 
+)
+go
+
+
+
+ALTER TABLE LESION
+	ADD CONSTRAINT XPKLESION PRIMARY KEY  CLUSTERED (IdLesion ASC)
+go
+
+
+
+CREATE TABLE OPERACION_FICHAPROGRAMACION
+( 
+	IdUsuario            int  NULL ,
+	FechaEmisión         datetime  NOT NULL ,
+	IdEtapa              int  NOT NULL ,
+	IdTorneo             int  NOT NULL ,
+	IdFecha              integer  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE OPERACION_FICHAPROGRAMACION
+	ADD CONSTRAINT XPKOPERACION_FICHAPROGRAMACION PRIMARY KEY  CLUSTERED (IdEtapa ASC,IdTorneo ASC,IdFecha ASC)
+go
+
+
+
+CREATE TABLE OPERACION_REPORTE_ADMISION
+( 
+	IdClub               int  NOT NULL ,
+	IdTorneo             int  NOT NULL ,
+	IdEtapa              int  NOT NULL ,
+	IdUsuario            int  NULL ,
+	FechaAdmision        datetime  NULL 
+)
+go
+
+
+
+ALTER TABLE OPERACION_REPORTE_ADMISION
+	ADD CONSTRAINT XPKOPERACION_REPORTE_ADMISION PRIMARY KEY  CLUSTERED (IdClub ASC,IdEtapa ASC,IdTorneo ASC)
+go
+
+
+
+CREATE TABLE REPORTE_ADMISION
+( 
+	IdClub               int  NOT NULL ,
+	IdTorneo             int  NOT NULL ,
+	IdEtapa              int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE REPORTE_ADMISION
+	ADD CONSTRAINT XPKREPORTE_ADMISION PRIMARY KEY  CLUSTERED (IdClub ASC,IdTorneo ASC,IdEtapa ASC)
+go
+
+
+
+CREATE TABLE REPRESENTANTE_CLUB
+( 
+	NombreRepresentanteClub varchar(15)  NULL ,
+	ApellidoRepresentanteClub varchar(20)  NULL ,
+	CodigoIdentificacion varchar(20)  NOT NULL ,
+	IdTipoIdenticacion   int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE REPRESENTANTE_CLUB
+	ADD CONSTRAINT XPKREPRESENTANTE_CLUB PRIMARY KEY  CLUSTERED (CodigoIdentificacion ASC,IdTipoIdenticacion ASC)
+go
+
+
+
+CREATE TABLE SOLICITUD
+( 
+	IdSolicitud          int IDENTITY ( 1,1 ) ,
+	FechaSolicitud       datetime  NULL ,
+	IdEstado             integer  NULL 
+)
+go
+
+
+
+ALTER TABLE SOLICITUD
+	ADD CONSTRAINT XPKSOLICITUD PRIMARY KEY  CLUSTERED (IdSolicitud ASC)
+go
+
+
+
+CREATE TABLE TELEFONO
+( 
+	NumeroTelefono       varchar(9)  NOT NULL ,
+	InformacionAdicional varchar(15)  NULL 
+)
+go
+
+
+
+ALTER TABLE TELEFONO
+	ADD CONSTRAINT XPKTELEFONO PRIMARY KEY  CLUSTERED (NumeroTelefono ASC)
+go
+
+
+
+CREATE TABLE TELEFONO_JUGADOR
+( 
+	NumeroTelefono       varchar(9)  NOT NULL ,
+	CodigoIdentificacion varchar(20)  NOT NULL ,
+	IdTipoIdenticacion   int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE TELEFONO_JUGADOR
+	ADD CONSTRAINT XPKJUGADOR_TELEFONO PRIMARY KEY  CLUSTERED (NumeroTelefono ASC,CodigoIdentificacion ASC,IdTipoIdenticacion ASC)
+go
+
+
+
+CREATE TABLE TIPO_ARBITRO
+( 
+	IdTipoArbitro        int IDENTITY ( 1,1 ) ,
+	NombreTipo           char(10)  NULL 
+)
+go
+
+
+
+ALTER TABLE TIPO_ARBITRO
+	ADD CONSTRAINT XPKTIPO_ARBITRO PRIMARY KEY  CLUSTERED (IdTipoArbitro ASC)
+go
+
+
+
+CREATE TABLE TIPO_IDENTIFICACION
+( 
+	IdTipoIdenticacion   int  NOT NULL ,
+	NombreTipoIdentificacion char(20)  NULL 
+)
+go
+
+
+
+ALTER TABLE TIPO_IDENTIFICACION
+	ADD CONSTRAINT XPKTIPO_IDENTIFICACION PRIMARY KEY  CLUSTERED (IdTipoIdenticacion ASC)
+go
+
+
+
+CREATE TABLE TIPO_USUARIO
+( 
+	IdTipoUsuario        int IDENTITY ( 1,1 ) ,
+	NombreRol            varchar(20)  NULL 
+)
+go
+
+
+
+ALTER TABLE TIPO_USUARIO
+	ADD CONSTRAINT XPKTIPO_USUARIO PRIMARY KEY  CLUSTERED (IdTipoUsuario ASC)
+go
+
+
+
+CREATE TABLE TORNEO
+( 
+	IdTorneo             int IDENTITY ( 1,1 ) ,
+	NombreTorneo         varchar(20)  NOT NULL ,
+	FechaInicioTorneo    datetime  NOT NULL ,
+	FechaFinalTorneo     datetime  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE TORNEO
+	ADD CONSTRAINT XPKTORNEO PRIMARY KEY  CLUSTERED (IdTorneo ASC)
+go
+
+
+
+CREATE TABLE TORNEO_ETAPA
+( 
+	FechaInicio          datetime  NOT NULL ,
+	FechaFinal           datetime  NOT NULL ,
+	IdTorneo             int  NOT NULL ,
+	IdEtapa              int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE TORNEO_ETAPA
+	ADD CONSTRAINT XPKTORNEO_ETAPA PRIMARY KEY  CLUSTERED (IdEtapa ASC,IdTorneo ASC)
+go
+
+
+
+CREATE TABLE USUARIO
+( 
+	IdUsuario            int IDENTITY ( 1,1 ) ,
+	NombreUsuario        varchar(50)  NOT NULL ,
+	IdTipoUsuario        int  NOT NULL 
+)
+go
+
+
+
+ALTER TABLE USUARIO
+	ADD CONSTRAINT XPKUSUARIO PRIMARY KEY  CLUSTERED (IdUsuario ASC)
+go
+
+
+
+
+ALTER TABLE ARBITRO
+	ADD CONSTRAINT R_68 FOREIGN KEY (IdTipoArbitro) REFERENCES TIPO_ARBITRO(IdTipoArbitro)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE ARBITRO
+	ADD CONSTRAINT R_127 FOREIGN KEY (CodigoIdentificacion,IdTipoIdenticacion) REFERENCES IDENTIFICACION(CodigoIdentificacion,IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE CERTIFICADO_LESION
+	ADD CONSTRAINT R_95 FOREIGN KEY (IdCertificadoMedico,CodigoIdentificacion,IdTipoIdenticacion) REFERENCES CERTIFICADO_MEDICO(IdCertificadoMedico,CodigoIdentificacion,IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE CERTIFICADO_LESION
+	ADD CONSTRAINT R_97 FOREIGN KEY (IdLesion) REFERENCES LESION(IdLesion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE CERTIFICADO_MEDICO
+	ADD CONSTRAINT R_129 FOREIGN KEY (IdEstado) REFERENCES ESTADOS(IdEstado)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE CERTIFICADO_MEDICO
+	ADD CONSTRAINT R_149 FOREIGN KEY (CodigoIdentificacion,IdTipoIdenticacion) REFERENCES JUGADOR(CodigoIdentificacion,IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE CLUB
+	ADD CONSTRAINT R_89 FOREIGN KEY (CodigoIdentificacion,IdTipoIdenticacion) REFERENCES REPRESENTANTE_CLUB(CodigoIdentificacion,IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE CONTRATO
+	ADD CONSTRAINT R_133 FOREIGN KEY (IdEstado) REFERENCES ESTADOS(IdEstado)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE CONTRATO
+	ADD CONSTRAINT R_156 FOREIGN KEY (CodigoIdentificacion,IdTipoIdenticacion,IdClub) REFERENCES JUGADOR_CLUB(CodigoIdentificacion,IdTipoIdenticacion,IdClub)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE DELEGADO_PARTIDO
+	ADD CONSTRAINT R_125 FOREIGN KEY (CodigoIdentificacion,IdTipoIdenticacion) REFERENCES IDENTIFICACION(CodigoIdentificacion,IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE DETALLE_ENFRENTAMIENTO
+	ADD CONSTRAINT R_5 FOREIGN KEY (IdEtapa,IdTorneo,IdFecha) REFERENCES FICHA_PROGRAMACIÓN(IdEtapa,IdTorneo,IdFecha)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE DETALLE_ENFRENTAMIENTO
+	ADD CONSTRAINT R_67 FOREIGN KEY (IdEquipoArbitraje) REFERENCES EQUIPO_ARBITRAJE(IdEquipoArbitraje)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE DETALLE_ENFRENTAMIENTO
+	ADD CONSTRAINT R_81 FOREIGN KEY (IdEstadio) REFERENCES ESTADIO(IdEstadio)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE DETALLE_ENFRENTAMIENTO
+	ADD CONSTRAINT R_83 FOREIGN KEY (CodigoIdentificacion,IdTipoIdenticacion) REFERENCES DELEGADO_PARTIDO(CodigoIdentificacion,IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE DETALLE_ENFRENTAMIENTO
+	ADD CONSTRAINT R_14 FOREIGN KEY (IdClubVisitante,IdClubLocal) REFERENCES ENFRENTAMIENTO(IdClubVisitante,IdClubLocal)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE DETALLE_SOLICITUD
+	ADD CONSTRAINT R_91 FOREIGN KEY (IdClub,IdTorneo,IdEtapa) REFERENCES REPORTE_ADMISION(IdClub,IdTorneo,IdEtapa)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE DETALLE_SOLICITUD
+	ADD CONSTRAINT R_92 FOREIGN KEY (IdSolicitud) REFERENCES SOLICITUD(IdSolicitud)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE DETALLE_SOLICITUD
+	ADD CONSTRAINT R_117 FOREIGN KEY (IdCertificadoMedico,CodigoIdentificacion,IdTipoIdenticacion) REFERENCES CERTIFICADO_MEDICO(IdCertificadoMedico,CodigoIdentificacion,IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE DETALLE_SOLICITUD
+	ADD CONSTRAINT R_158 FOREIGN KEY (CodigoIdentificacion,IdTipoIdenticacion) REFERENCES JUGADOR(CodigoIdentificacion,IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE DETALLE_SOLICITUD
+	ADD CONSTRAINT R_159 FOREIGN KEY (IdContrato,CodigoIdentificacion,IdTipoIdenticacion,IdClub) REFERENCES CONTRATO(IdContrato,CodigoIdentificacion,IdTipoIdenticacion,IdClub)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE E_ARBITRAJE_ARBITRO
+	ADD CONSTRAINT R_86 FOREIGN KEY (IdEquipoArbitraje) REFERENCES EQUIPO_ARBITRAJE(IdEquipoArbitraje)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE E_ARBITRAJE_ARBITRO
+	ADD CONSTRAINT R_87 FOREIGN KEY (IdArbitro) REFERENCES ARBITRO(IdArbitro)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE ENFRENTAMIENTO
+	ADD CONSTRAINT R_136 FOREIGN KEY (IdClubLocal) REFERENCES CLUB(IdClub)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE ENFRENTAMIENTO
+	ADD CONSTRAINT R_137 FOREIGN KEY (IdClubVisitante) REFERENCES CLUB(IdClub)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE ETAPA_FECHA
+	ADD CONSTRAINT R_151 FOREIGN KEY (IdEtapa) REFERENCES ETAPA(IdEtapa)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE ETAPA_FECHA
+	ADD CONSTRAINT R_161 FOREIGN KEY (IdFecha) REFERENCES FECHA(IdFecha)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE FICHA_PROGRAMACIÓN
+	ADD CONSTRAINT R_152 FOREIGN KEY (IdEtapa,IdTorneo) REFERENCES TORNEO_ETAPA(IdEtapa,IdTorneo)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE FICHA_PROGRAMACIÓN
+	ADD CONSTRAINT R_153 FOREIGN KEY (IdEtapa,IdFecha) REFERENCES ETAPA_FECHA(IdEtapa,IdFecha)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE IDENTIFICACION
+	ADD CONSTRAINT R_122 FOREIGN KEY (IdTipoIdenticacion) REFERENCES TIPO_IDENTIFICACION(IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE JUGADOR
+	ADD CONSTRAINT R_123 FOREIGN KEY (CodigoIdentificacion,IdTipoIdenticacion) REFERENCES IDENTIFICACION(CodigoIdentificacion,IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE JUGADOR_CLUB
+	ADD CONSTRAINT R_155 FOREIGN KEY (IdClub) REFERENCES CLUB(IdClub)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE JUGADOR_CLUB
+	ADD CONSTRAINT R_154 FOREIGN KEY (CodigoIdentificacion,IdTipoIdenticacion) REFERENCES JUGADOR(CodigoIdentificacion,IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE OPERACION_FICHAPROGRAMACION
+	ADD CONSTRAINT R_146 FOREIGN KEY (IdUsuario) REFERENCES USUARIO(IdUsuario)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE OPERACION_FICHAPROGRAMACION
+	ADD CONSTRAINT R_148 FOREIGN KEY (IdEtapa,IdTorneo,IdFecha) REFERENCES FICHA_PROGRAMACIÓN(IdEtapa,IdTorneo,IdFecha)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE OPERACION_REPORTE_ADMISION
+	ADD CONSTRAINT R_141 FOREIGN KEY (IdClub,IdTorneo,IdEtapa) REFERENCES REPORTE_ADMISION(IdClub,IdTorneo,IdEtapa)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE OPERACION_REPORTE_ADMISION
+	ADD CONSTRAINT R_145 FOREIGN KEY (IdUsuario) REFERENCES USUARIO(IdUsuario)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE REPORTE_ADMISION
+	ADD CONSTRAINT R_88 FOREIGN KEY (IdClub) REFERENCES CLUB(IdClub)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE REPORTE_ADMISION
+	ADD CONSTRAINT R_90 FOREIGN KEY (IdEtapa,IdTorneo) REFERENCES TORNEO_ETAPA(IdEtapa,IdTorneo)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE REPRESENTANTE_CLUB
+	ADD CONSTRAINT R_126 FOREIGN KEY (CodigoIdentificacion,IdTipoIdenticacion) REFERENCES IDENTIFICACION(CodigoIdentificacion,IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE SOLICITUD
+	ADD CONSTRAINT R_132 FOREIGN KEY (IdEstado) REFERENCES ESTADOS(IdEstado)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE TELEFONO_JUGADOR
+	ADD CONSTRAINT R_99 FOREIGN KEY (NumeroTelefono) REFERENCES TELEFONO(NumeroTelefono)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE TELEFONO_JUGADOR
+	ADD CONSTRAINT R_140 FOREIGN KEY (CodigoIdentificacion,IdTipoIdenticacion) REFERENCES JUGADOR(CodigoIdentificacion,IdTipoIdenticacion)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE TORNEO_ETAPA
+	ADD CONSTRAINT R_64 FOREIGN KEY (IdTorneo) REFERENCES TORNEO(IdTorneo)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE TORNEO_ETAPA
+	ADD CONSTRAINT R_139 FOREIGN KEY (IdEtapa) REFERENCES ETAPA(IdEtapa)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+
+
+
+ALTER TABLE USUARIO
+	ADD CONSTRAINT R_65 FOREIGN KEY (IdTipoUsuario) REFERENCES TIPO_USUARIO(IdTipoUsuario)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go

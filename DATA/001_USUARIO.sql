@@ -1,0 +1,98 @@
+SET IDENTITY_INSERT USUARIO ON;
+
+INSERT INTO USUARIO(IdUsuario, IdTipoUsuario,NombreUsuario)
+VALUES
+--UN SOLO REPRESENTANTE DE LA FPF
+(1,1, 'ALEJANDRO'),
+--UN SOLO REPRESENTANTE DE LA LFP
+(2,2, 'FELIPE'),
+--18 REPRESENTANTE YA QUE JUGARAN 18 CLUBES
+(3, 3, 'JEFFERSON'),
+(4, 3, 'ALEXANDER'),
+(5, 3, 'BENJAMIN'),
+(6, 3, 'CHRISTOPHER'),
+(7, 3, 'DANIEL'),
+(8, 3, 'ETHAN'),
+(9, 3, 'GABRIEL'),
+(10, 3, 'HENRY'),
+(11, 3, 'ISAAC'),
+(12, 3, 'JACK'),
+(13, 3, 'LUCAS'),
+(14, 3, 'MATTHEW'),
+(15, 3, 'NATHAN'),
+(16, 3, 'OLIVER'),
+(17, 3, 'SAMUEL'),
+(18, 3, 'THEODORE'),
+(19, 3, 'WILLIAM'),
+(20, 3, 'ZACHARY'),
+--ADMINISTRADORES
+(21,4,'MICHAEL'),
+(22, 4, 'JAMES'),
+(23, 4, 'DAVID'),
+(24, 4, 'JOHN'),
+(25, 4, 'ROBERT'),
+(26, 4, 'JOSEPH'),
+(27, 4, 'THOMAS'),
+(28, 4, 'CHARLES'),
+(29, 4, 'CHRISTOPHER'),
+(30, 4, 'DANIEL'),
+--COORDINADOR
+(31,5,'SARA'),
+(32, 5, 'JACOB'),
+(33, 5, 'LILY'),
+(34, 5, 'MICHAEL'),
+(35, 5, 'GRACE'),
+(36, 5, 'JOSHUA'),
+(37, 5, 'EMILY'),
+(38, 5, 'ANDREW'),
+(39, 5, 'CHLOE'),
+(40, 5, 'RYAN'),
+--OPERADOR
+(41,6,'JOSUE'),
+(42, 6, 'HANNAH'),
+(43, 6, 'ELIJAH'),
+(44, 6, 'ZOE'),
+(45, 6, 'JONATHAN'),
+(46, 6, 'NATALIE'),
+(47, 6, 'CHRISTIAN'),
+(48, 6, 'LILY'),
+(49, 6, 'DYLAN'),
+(50, 6, 'MILA'),
+--DELEGADO DEL PARTIDO
+(51,7, 'MARTIN'),
+(52,7, 'LUIGGI'),
+(53,7, 'ERICK'),
+(54,7, 'JONATHAN'),
+(55,7,'LEVI'),
+(56,7,'SEBASTIAN'),
+(57,7,'JOHAN'),
+(58,7,'ANGELO'),
+(59,7,'ENRIQUE'),
+(60,7,'BRUNO'),
+--ARBITRO
+(61, 8, 'VICTORIA'),
+(62, 8, 'JULIAN'),
+(63, 8, 'LAYLA'),
+(64, 8, 'ADRIAN'),
+(65, 8, 'AURORA'),
+(66, 8, 'SEBASTIAN'),
+(67, 8, 'PENELOPE'),
+(68, 8, 'AARON'),
+(69, 8, 'SCARLETT'),
+(70, 8, 'ADAM'),
+(71, 8, 'ARIA'),
+(72, 8, 'NICHOLAS'),
+(73, 8, 'ELEANOR'),
+(74, 8, 'ALEXANDER'),
+(75, 8, 'LUNA'),
+(76, 8, 'EVAN'),
+(77, 8, 'SAVANNAH'),
+(78, 8, 'LUKE'),
+(79, 8, 'STELLA'),
+(80, 8, 'ISAIAH'),
+--REPRESENTANTE DEL CONAR
+(81,9,'YERSON')
+GO
+
+SET IDENTITY_INSERT USUARIO OFF;
+

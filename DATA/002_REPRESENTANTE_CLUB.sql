@@ -1,0 +1,20 @@
+INSERT INTO REPRESENTANTE_CLUB (NombreRepresentanteClub,ApellidoRepresentanteClub,CodigoIdentificacion,IdTipoIdenticacion) VALUES
+('Juan','Perez', 'C12585670', 9),
+('Maria','Garcia', 'C12585671', 9),
+('Carlos','Sanchez', 'C12585672', 9),
+('Ana' ,'Martinez', 'C12585673', 9),
+('Luis' ,'Ramirez', 'C12585674', 9),
+('Elena' ,'Fernandez', 'C12585675', 9),
+('Jorge', 'Lopez', 'C12585676', 9),
+('Patricia' ,'Gomez', 'C12585677', 9),
+('Fernando', 'Torres', 'C12585678', 9),
+('Isabel' ,'Ruiz', 'C12585679', 9),
+('Pedro', 'Díaz', 'C12585680', 9),
+('Laura', 'Hernández', 'C12585681', 9),
+('Alejandro', 'Jiménez', 'C12585682', 9),
+('Sofía', 'Martín', 'C12585683', 9),
+('Gabriel', 'Sánchez', 'C12585684', 9),
+('Lucía', 'Gutiérrez', 'C12585685', 9),
+('Martín', 'Navarro', 'C12585686', 9),
+('Carolina', 'Castro', 'C12585687', 9)
+go

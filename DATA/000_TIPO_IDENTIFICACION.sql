@@ -1,0 +1,14 @@
+
+INSERT INTO TIPO_IDENTIFICACION(IdTipoIdenticacion,NombreTipoIdentificacion)
+VALUES
+(1, 'DNI'),
+(2, 'CARNET_EXTRANJERIA'),
+(3, 'CARNET_JUGADOR'),
+(4, 'CARNET_ARBITRO'),
+(5, 'CREDENCIAL'),
+(6, 'RUC'),
+(7, 'CODIGO_SERIE'),
+(8, 'ID'),
+(9, 'CODIGO'),
+(10, 'NUMERO TARJETA')
+GO
