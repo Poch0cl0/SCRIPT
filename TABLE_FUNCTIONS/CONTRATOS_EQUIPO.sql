@@ -18,4 +18,3 @@ RETURN
         C.IdClub = @IdClub
 );
 
-SELECT * FROM dbo.fn_ContratosPorEquipo(4); 
